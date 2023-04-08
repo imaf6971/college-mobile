@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Feather } from '@expo/vector-icons';
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import { useAuth } from "../../context/auth";
-import { Stack } from "expo-router";
 
 export default function SignIn() {
   const { signIn } = useAuth();
@@ -13,7 +12,6 @@ export default function SignIn() {
 
     <View className="justify-between bg-blue-400">
       {/* <Text onPress={() => signIn()}>Sign In</Text> */}
-      <Stack.Screen options={{ headerShown: false }} />
       <View className="pb-10 items-center justify-end h-1/2">
         <Text className="text-3xl text-white">Войти в аккаунт</Text>
       </View>
