@@ -1,44 +1,69 @@
-import { View, Text } from 'react-native'
-import { Feather } from '@expo/vector-icons';
-// import { useAuth } from '../../context/auth'
+import { View, Text } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Calendar, CalendarList, LocaleConfig } from 'react-native-calendars'
+import { Entypo } from '@expo/vector-icons';
 
-function capitalize(str: string): string {
-  return str.charAt(0).toUpperCase() + str.slice(1);
+LocaleConfig.locales['ru'] = {
+  monthNames: [
+    'Январь',
+    'Февраль',
+    'Март',
+    'Апрель',
+    'Maй',
+    'Июнь',
+    'Июль',
+    'Август',
+    'Сентябрь',
+    'Октябрь',
+    'Ноябрь',
+    'Декабрь',
+  ],
+  monthNamesShort: ['Янв.', 'Февр.', 'Март', 'Апр.', 'Май', 'Июнь', 'Июль.', 'Авг.', 'Сент.', 'Окт.', 'Ноя.', 'Дек.'],
+  dayNames: ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'],
+  dayNamesShort: ['Пн', 'Вт', 'Cр', 'Чт', 'Пт', 'Cб', 'Вс'],
+  today: "Сегодня"
 }
 
-export default function Index() {
-  // const { signOut } = useAuth();
-  const insets = useSafeAreaInsets();
+LocaleConfig.defaultLocale = 'ru'
 
-  const today = new Date();
-  const currentMonth = Intl.DateTimeFormat(undefined, {
-    month: 'long'
-  }).format(today);
+export default function Index() {
+  // const {signOut} = useAuth();
+  const insets = useSafeAreaInsets();
 
   return (
     <View
       style={{
-        paddingTop: insets.top,
+        paddingTop: insets.top + 18,
         paddingBottom: insets.bottom,
-        paddingLeft: insets.left,
-        paddingRight: insets.right
-      }} >
-      <Text className="ml-4 text-neutral-700 mt-4 font-semibold text-2xl">
+        paddingLeft: insets.left + 20,
+        paddingRight: insets.right + 20,
+      }}>
+      <Text className="font-inter font-bold color-neutral-700 text-3xl">
         Добро пожаловать!
       </Text>
-      <View className="items-center my-4 mx-4 bg-white rounded-lg">
-        <View className="items-center py-4 w-full border-b border-neutral-300">
-          <Text className="font-medium text-xl text-neutral-700">
-            Ближайшие мероприятия
-          </Text>
+      <View className="bg-neutral-50 rounded-lg">
+        <View className="py-4 border-b border-neutral-300">
+          <Text className="font-inter-md color-neutral-700 text-xl text-center">Ближайшие мероприятия</Text>
         </View>
-        <View className='w-full py-4 flex-row justify-around items-center'>
-          <Feather name='chevron-left' size={24} color="#404040" />
-          <Text className='font-semibold text-neutral-700 text-lg'>{capitalize(currentMonth)}</Text>
-          <Feather name='chevron-right' size={24} color="#404040" />
-        </View>
+        <Calendar
+          theme={{
+            textMonthFontFamily: "Inter-SemiBold",
+            textMonthFontSize: 20,
+            textDayFontFamily: "Inter-SemiBold",
+            textDayFontSize: 14,
+            textDayHeaderFontFamily: "Inter-SemiBold",
+          }}
+          renderArrow={(dir) => {
+            if (dir === 'left') {
+              return <Entypo name="chevron-thin-left" size={18} />
+            }
+            if (dir === 'right') {
+              return <Entypo name="chevron-thin-right" size={18} />
+            }
+          }}
+        />
       </View>
+
     </View >
   )
 }

@@ -29,7 +29,7 @@ function useProtectedRoute(user: any) {
 }
 
 export function Provider({ children }) {
-  const [user, setAuth] = useState(null);
+  const [user, setAuth] = useState({});
 
   useProtectedRoute(user);
 
